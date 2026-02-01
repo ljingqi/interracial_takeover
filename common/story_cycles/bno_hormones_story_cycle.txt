@@ -137,7 +137,7 @@
                     story_owner = {
                         change_variable = {
                             name = bno_hormones
-                            multiply = 0.9
+                            multiply = 0.99
                         }
                     }
                 }

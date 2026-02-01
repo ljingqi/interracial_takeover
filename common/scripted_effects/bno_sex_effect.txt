@@ -85,12 +85,8 @@ bno_apply_hormones_effect = {
 		var:story_bno_hormones = {
 			save_scope_as = story_bno_hormones
 		}
-		scope:story_bno_hormones = {
-			add_to_variable_list = {
-				name = bno_hormones_giver_list
-				target = $TARGET$
-				weeks = 1
-			}
+		bno_add_to_hormones_giver_list = {
+			TARGET = $TARGET$
 		}
 	}
 	else = {
@@ -98,11 +94,25 @@ bno_apply_hormones_effect = {
 			type = story_bno_hormones
 			save_scope_as = story_bno_hormones
 		}
-		scope:story_bno_hormones = {
+		bno_add_to_hormones_giver_list = {
+			TARGET = $TARGET$
+		}
+	}
+}
+
+bno_add_to_hormones_giver_list = {
+	scope:story_bno_hormones = {
+		if = {
+			limit = {
+				variable_list_size = {
+                    name = bno_hormones_giver_list
+                    value < 10
+                }
+			}
 			add_to_variable_list = {
 				name = bno_hormones_giver_list
 				target = $TARGET$
-				weeks = 1
+				months = 1
 			}
 		}
 	}
