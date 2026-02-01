@@ -36,6 +36,12 @@ bno_transformation_value = {
 	}
 }
 
+bno_hormones_value = {
+	value = 0
+	add ?= var:bno_hormones
+	divide = 100
+}
+
 bno_gold_amount = {
 	every_ruler = {
 		limit = {
@@ -261,5 +267,6 @@ bno_penis_size = {
 		bno_bbc = { add = 9 }
 		fallback = { add = 4 }
 	}
+	add = bno_hormones_value
 	divide = 9
 }
