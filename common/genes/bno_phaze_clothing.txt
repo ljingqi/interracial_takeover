@@ -9,8 +9,12 @@
                 female = {
                     1 = female_clothes_secular_western_nudity_01
                 }
-                boy = male
-                girl = female
+                boy = {
+                    1 = male_clothes_situational_western_bedchamber_01_common
+                }
+                girl = {
+                    1 = female_clothes_situational_western_bedchamber_01_common
+                }
             }
             phaze_slave = {
                 index = 1

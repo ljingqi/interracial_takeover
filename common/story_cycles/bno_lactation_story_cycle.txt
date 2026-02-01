@@ -13,7 +13,7 @@
         }
         set_variable = {
             name = bno_milk_amount_modifier
-            value = 10
+            value = 20
         }
     }
     

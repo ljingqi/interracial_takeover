@@ -1,7 +1,10 @@
 ﻿bno_set_maximum_milk_amount_effect = {
-    change_variable = {
+    set_variable = {
         name = bno_milk_amount
-        max = $AMOUNT$
+        value = {
+            value = var:bno_milk_amount
+            max = $AMOUNT$
+        }
     }
 }
 

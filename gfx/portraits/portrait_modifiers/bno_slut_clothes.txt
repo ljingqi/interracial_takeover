@@ -1,12 +1,10 @@
 ﻿bno_slut_clothes = {
     usage = customization
     priority = 1000
+
     add_accessory_modifiers = {
         gene = bno_phaze_clothes
         template = no_clothes
-        is_valid_custom = {
-            is_slut = yes
-        }
     }
     add_accessory_modifiers = {
         gene = bno_phaze_clothes

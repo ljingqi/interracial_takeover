@@ -495,7 +495,7 @@ bno_smaller_waist = {
 
 bno_white_girl = {
 	usage = game
-	priority = 900
+	priority = 999
 	bno_white_girl = {
 		dna_modifiers = {
 			accessory = {
@@ -520,12 +520,6 @@ bno_white_girl = {
 				mode = add
 				gene = shoes
 				template = no_shoes
-				value = 0
-			}
-			accessory = {
-				mode = add
-				gene = phaze_clothes
-				template = no_clothes
 				value = 0
 			}
 			accessory = {
