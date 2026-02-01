@@ -89,7 +89,7 @@ bno_apply_hormones_effect = {
 			add_to_variable_list = {
 				name = bno_hormones_giver_list
 				target = $TARGET$
-				months = 1
+				weeks = 1
 			}
 		}
 	}
@@ -102,7 +102,7 @@ bno_apply_hormones_effect = {
 			add_to_variable_list = {
 				name = bno_hormones_giver_list
 				target = $TARGET$
-				months = 1
+				weeks = 1
 			}
 		}
 	}

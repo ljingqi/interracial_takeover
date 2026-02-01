@@ -19,6 +19,21 @@
     effect_group = {
         days = { 2 12 }
         first_valid = {
+            triggered_effect = { #limit hormones variable to 100
+                trigger = {
+                    story_owner = {
+                        var:bno_hormones >= 100
+                    }
+                }
+                effect = {
+                    story_owner = {
+                        set_variable = {
+                            name = bno_hormones
+                            value = 100
+                        }
+                    }
+                }
+            }
             triggered_effect = {
                 trigger = {
                     has_variable_list = bno_hormones_giver_list

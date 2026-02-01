@@ -1,0 +1,143 @@
+﻿bno_make_holy_order_leader_blacked_girl_effect = {
+    if = {
+        limit = {
+            is_slut = no
+        }
+        create_blacked_european_girls = {
+            TEMPLATE = bno_female_holy_order_leader_character_template
+            LOCATION = location
+            SCOPE = leader
+        }
+        create_title_and_vassal_change = {
+            type = granted
+            save_scope_as = change
+            add_claim_on_loss = no
+        }
+        scope:title = {
+            change_title_holder = {
+                holder = scope:leader
+                change = scope:change
+                take_baronies = yes
+            }
+        }
+        death = {
+			death_reason = death_vanished
+		}
+    }
+    if = {
+        limit = {
+            any_courtier = {
+                is_slut = no
+            }
+        }
+        save_scope_as = new_employer
+        random_courtier = {
+            limit = {
+                is_slut = no
+            }
+            save_scope_as = non_slut_courtier
+        }
+        scope:non_slut_courtier = {
+            bno_make_holy_order_member_blacked_girl_effect = yes
+        }
+    }
+}
+
+bno_make_holy_order_member_blacked_girl_effect = {
+    if = {
+        limit = {
+            is_slut = no
+        }            
+        death = {
+	    	death_reason = death_vanished
+	    }
+        if = {
+            limit = {
+                scope:new_employer = {
+                    any_courtier_or_guest = {
+                        has_trait = bno_whitegirl
+                        count < 5
+                    }
+                }
+            }
+            create_blacked_european_girls = {
+                TEMPLATE = bno_female_holy_order_leader_character_template
+                LOCATION = scope:new_employer.location
+                SCOPE = female_courtier
+            }
+            scope:new_employer = {
+                add_courtier = scope:female_courtier
+            }
+        }
+    }
+}
+
+bno_maintenance_story_transform_leader_and_member_effect = {
+    if = {
+        limit = {
+            OR = {
+                AND = {
+                    is_ruler = yes
+                    is_slut = no
+                    primary_title = {
+                        has_variable = bbc_holy_order
+                    }
+                }
+                AND = {
+                    is_ruler = yes
+                    is_slut = no
+                    primary_title = {
+                        is_holy_order = yes
+                        save_temporary_scope_as = bno_holy_order_title
+                    }
+                    faith = {
+                        is_considered_bno_faith = yes
+                        any_faith_holy_order = {
+                            title = {
+                                this = scope:bno_holy_order_title
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        primary_title = {
+            set_variable = bbc_holy_order
+			save_scope_as = title
+		}
+		bno_make_holy_order_leader_blacked_girl_effect = yes
+    }
+}
+
+bno_maintenance_story_transform_member_effect = {
+    if = {
+        limit = {
+            OR = {
+                AND = {
+                    is_ruler = no
+		    		is_slut = no
+		    		liege.primary_title ?= {
+		    			has_variable = bbc_holy_order
+		    		}
+                }
+                AND = {
+                    is_ruler = no
+                    is_slut = no
+                    liege.primary_title ?= {
+                        is_holy_order = yes
+                        save_temporary_scope_as = bno_holy_order_title
+                    }
+                    liege.faith ?= {
+                        is_considered_bno_faith = yes
+                        any_faith_holy_order = {
+                            title = {
+                                this = scope:bno_holy_order_title
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        bno_make_holy_order_member_blacked_girl_effect = yes
+    }
+}

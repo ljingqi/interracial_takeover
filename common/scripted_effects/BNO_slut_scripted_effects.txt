@@ -943,7 +943,7 @@ create_slut = {
 create_character_with_european_heritage_with_parents = {
 	random_character_with_royal_court = {
 		limit = {
-			bno_culture_has_european_heritage_pillar_trigger = yes
+			bno_culture_has_non_african_heritage_pillar_trigger = yes
 		}
 		save_scope_as = european
 	}
@@ -956,7 +956,7 @@ create_character_with_european_heritage_with_parents = {
 create_character_with_european_heritage_with_parents_template_and_location = {
 	random_character_with_royal_court = {
 		limit = {
-			bno_culture_has_european_heritage_pillar_trigger = yes
+			bno_culture_has_non_african_heritage_pillar_trigger = yes
 		}
 		save_scope_as = european
 	}

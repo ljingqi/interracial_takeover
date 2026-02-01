@@ -3,16 +3,10 @@
 ###
 
 bno_can_recruit_bno_african_warriors = {
-    is_alive = yes
-    is_playable_character = yes
-    trigger_if = {
-        limit = {
-            is_a_male = yes
-        }
+    OR = {
         is_bbc = yes
-    }
-    trigger_else = {
-        is_bno_mindless_bbc_slut = yes
+        is_slut = yes
+        is_whiteboi = yes
     }
     is_culture_bnoc = yes
 }

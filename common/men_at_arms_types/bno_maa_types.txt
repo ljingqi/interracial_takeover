@@ -1,6 +1,7 @@
 ﻿@cultural_maa_extra_ai_score = 80 # Equivalent to having 8 extra regiments beyond what the code scoring would indicate (see NEGATIVE_SCORE_PER_EXISTING_REGIMENT)
 @provisions_cost_infantry_cheap = 3
 @provisions_cost_infantry_expensive = 12
+@bno_african_warriors_ai_score = 150
 
 bno_african_warriors = {
 	type = bnwo_armies
@@ -31,7 +32,7 @@ bno_african_warriors = {
 	provision_cost = @provisions_cost_infantry_cheap
 
 	stack = 250
-	ai_quality = { value = @cultural_maa_extra_ai_score }
+	ai_quality = { value = @bno_african_warriors_ai_score }
 	icon = bno_african_warriors
 }
 # Special
