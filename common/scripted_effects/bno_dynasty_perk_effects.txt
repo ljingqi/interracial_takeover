@@ -34,7 +34,7 @@ bno_bbc_marriage_message_effect = {
         months = 6
     }
     send_interface_message = {
-		type = bno_blacked_events
+		type = bno_msg_blackened_dynasty
 		title = {
 			first_valid = {
 				triggered_desc = {

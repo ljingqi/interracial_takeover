@@ -13,3 +13,13 @@ bno_blacked_events = {
 	style = good
 	message_filter_type = bno_blacked_events
 }
+
+bno_msg_blackened_dynasty = {
+	icon = bnobbc
+	display = feed
+	message_filter_type = bno_blackened_dynasty
+	title = event_message_title
+	desc = event_message_text_and_effect
+	style = good
+	combine_into_one = yes
+}

@@ -11,3 +11,8 @@ bno_blacked_events = {
     display = feed 
     group = bno
 }
+
+bno_blackened_dynasty = {
+    display = feed
+    group = bno
+}
