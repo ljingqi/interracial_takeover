@@ -422,22 +422,43 @@ bno_bigger_butts = {
 		dna_modifiers = {
 			#Changes Butt Size
 			morph = {
-				mode = modify gene = gene_bs_butt_size
+				mode = modify_multiply
+				gene = gene_bs_butt_size
+				value = {
+					value = 0.04
+					multiply = {
+						add = bno_ass_size
+					}
+				}
+			}
+			morph = {
+				mode = modify 
+				gene = gene_bs_butt_size
 				value = {
 					add = {
 						value = bno_ass_size
-						divide = 10
+						divide = bno_ass_divider_value
 					}
 				}
 			}
 			#Changes Hip Size
+			morph = {
+				mode = modify_multiply 
+				gene = gene_bs_hips_size
+				value = {
+					value = 0.04
+					multiply = {
+						add = bno_ass_size
+					}
+				}
+			}
 			morph = {
 				mode = modify 
 				gene = gene_bs_hips_size
 				value = {
 					add = {
 						value = bno_ass_size
-						divide = 10
+						divide = bno_ass_divider_value
 					}
 				}
 			}
@@ -466,7 +487,7 @@ bno_smaller_waist = {
 					add = {
 						value = bno_waist_size
 						multiply = -1
-						divide = 10
+						divide = bno_waist_divider_value
 					}
 				}
 			}
@@ -477,7 +498,7 @@ bno_smaller_waist = {
 					add = {
 						value = bno_waist_size
 						multiply = -1
-						divide = 10
+						divide = bno_waist_divider_value
 					}
 				}
 			}

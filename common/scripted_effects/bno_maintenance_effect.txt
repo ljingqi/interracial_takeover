@@ -279,6 +279,7 @@ bno_remove_bbc_from_non_african = {
 bno_seed_breast_size_variable = {
     if = {
         limit = {
+            NOT = { has_variable = bno_breast_size }
             NOT = { has_trait = bno_genesis_transformation }
         }
         switch = {

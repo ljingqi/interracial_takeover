@@ -7,8 +7,21 @@
 	}
 }
 
+bno_ass_divider_value = {
+	value = 5
+	#match the total ass transformation value
+}
+
+bno_waist_divider_value = {
+	value = 5
+	#match the total ass transformation value
+}
+
+# total 5
 bno_transformation_value = {
+	# 4 from here
 	value = bno_genesis_transformation_value
+	# 1 from here
 	add = {
 		value = 0
 		if = {
@@ -104,9 +117,9 @@ hair_color_y = {
 bno_skin_color_max_limit = {
 	switch = {
 		trigger = has_game_rule
-		bno_skin_color_light = { value = 1 }
-		bno_skin_color_tanned = { value = 2 }
-		bno_skin_color_brown = { value = 3 }
+		bno_skin_color_light = { value = 0.125 } # 0.125
+		bno_skin_color_tanned = { value = 0.25 } # 0.25
+		bno_skin_color_brown = { value = 0.5 } # 0.5
 		fallback = { value = 1000 }
 	}
 }
