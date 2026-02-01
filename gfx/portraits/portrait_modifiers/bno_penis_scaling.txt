@@ -64,3 +64,29 @@
         }
     }
 }
+
+bno_dynamic_male_body = {
+    usage = game
+    priority = 999
+    bno_dynamic_male_body = {
+        dna_modifiers = {
+            morph = {
+                mode = modify
+                gene = gene_bs_upper_body_muscle
+                value = bno_hormones_value
+            }
+            morph = {
+                mode = modify
+                gene = gene_bs_lower_body_muscle
+                value = bno_hormones_value
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 1
+                is_a_male = yes
+            }
+        }
+    }
+}
