@@ -1,5 +1,5 @@
 ﻿#bno_sex_increase_dynasty_prestige
-#bno_bbc_marriage_effect
+#bno_bbc_marriage_dynasty_effect
 #bno_increase_county_control
 #bno_decrease_county_control
 #bno_dismiss_local_bbc
@@ -27,48 +27,75 @@ bno_sex_increase_dynasty_prestige = {
     }
 }
 
+
+bno_bbc_marriage_message_effect = {
+    add_character_flag = {
+        flag = bno_bbc_marriage_message_effect
+        months = 6
+    }
+    send_interface_message = {
+		type = bno_blacked_events
+		title = {
+			first_valid = {
+				triggered_desc = {
+					trigger = {
+						$SOURCE$ = root
+					}
+					desc = bno_marriage.0007.notifications.title.root
+				}
+				desc = bno_marriage.0007.notifications.title.spouse
+			}
+		}
+		right_icon = $SOURCE$
+		desc = {
+			first_valid = {
+				triggered_desc = {
+					trigger = {
+						$SOURCE$ = {
+                            is_a_male = yes
+                        }
+					}
+					desc = bno_marriage.0007.notifications.desc.male
+				}
+				desc = bno_marriage.0007.notifications.desc.female
+			}
+		}
+		bno_bbc_marriage_effect = {
+            SOURCE = $SOURCE$
+        }
+	}
+}
+
 bno_bbc_marriage_effect = {
-    dynast = {
-        send_interface_message = {
-	    	type = bno_blacked_events
-	    	title = {
-				first_valid = {
-					triggered_desc = {
-						trigger = {
-							$SOURCE$ = root
-						}
-						desc = bno_marriage.0007.notifications.title.root
-					}
-					desc = bno_marriage.0007.notifications.title.spouse
-				}
-			}
-	    	right_icon = $SOURCE$
-	    	desc = {
-				first_valid = {
-					triggered_desc = {
-						trigger = {
-							$SOURCE$ = {
-                                is_a_male = yes
-                            }
-						}
-						desc = bno_marriage.0007.notifications.desc.male
-					}
-					desc = bno_marriage.0007.notifications.desc.female
-				}
-			}
-	    	$SOURCE$ = {
-                dynasty ?= {
-	    	    	add_dynasty_prestige = bno_bbc_marriage_perk_reward
-	    	    }
-                if = {
-                    limit = {
-                        has_legitimacy = yes
-                    }
-	    	        add_legitimacy = bno_bbc_marriage_prestige_perk_reward
-                }
-	    	    add_prestige = bno_bbc_marriage_prestige_perk_reward
-            }	
+    $SOURCE$ = {
+        dynasty ?= {
+	    	add_dynasty_prestige = bno_bbc_marriage_perk_reward
 	    }
+        if = {
+            limit = {
+                has_legitimacy = yes
+            }
+	        add_legitimacy = bno_bbc_marriage_prestige_perk_reward
+        }
+	    add_prestige = bno_bbc_marriage_prestige_perk_reward
+    }
+}
+
+bno_bbc_marriage_dynasty_effect = {
+    dynast = {
+        if = {
+            limit = {
+                NOT = { has_character_flag = bno_bbc_marriage_message_effect }
+            }
+            bno_bbc_marriage_message_effect = {
+                SOURCE = $SOURCE$
+            }
+        }
+        else = {
+            bno_bbc_marriage_effect = {
+                SOURCE = $SOURCE$
+            }
+        }
     }
 }
 

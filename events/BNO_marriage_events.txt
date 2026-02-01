@@ -212,7 +212,7 @@ bno_marriage.0007 = {
 				}
 			}
 			dynasty ?= {
-				bno_bbc_marriage_effect = {
+				bno_bbc_marriage_dynasty_effect = {
 					SOURCE = root
 				}		
 			}	
@@ -227,7 +227,7 @@ bno_marriage.0007 = {
 			}
 			scope:spouse ?= {
 				dynasty ?= {
-					bno_bbc_marriage_effect = {
+					bno_bbc_marriage_dynasty_effect = {
 						SOURCE = scope:spouse
 					}
 				}
