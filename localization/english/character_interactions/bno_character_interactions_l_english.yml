@@ -60,3 +60,9 @@
 
  bno_apply_elixir_interaction.bno_elixir_of_the_black_womb.effect.actor.tooltip: "[actor.GetFirstName] forces the [bno_elixir_of_the_black_womb|E] to be taken."
  bno_apply_elixir_interaction.bno_elixir_of_the_black_womb.effect.recipient.tooltip: "[recipient.GetFirstName] drinks the [bno_elixir_of_the_black_womb|E], his cock withering and hunger for cum consuming him."
+
+ bno_slave_interaction: "Claim Your Slave"
+ bno_slave_interaction.desc: "Your seed has rewired her mind. Now, enforce the new reality."
+ bno_slave_interaction.send_name: "Enforce Her Duty"
+ bno_slave_interaction.invites: "@bno_slave_interaction_invites_icon! Summon Her to Court"
+ bno_slave_interaction.marries: "@bno_slave_interaction_marries_icon! Make Her your Breeding Stock"

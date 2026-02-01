@@ -1,0 +1,11 @@
+﻿add_required_slave_flags = {
+    add_character_flag = blocked_from_leaving
+    add_character_flag = no_headgear
+    add_character_flag = is_naked
+}
+
+remove_required_slave_flags = {
+    remove_character_flag = blocked_from_leaving
+    remove_character_flag = no_headgear
+    remove_character_flag = is_naked
+}

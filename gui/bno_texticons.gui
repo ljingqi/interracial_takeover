@@ -107,3 +107,71 @@ texticon = {
 		fontsize = 15
 	}
 }
+
+## Slave Interaction
+
+texticon = {
+	icon = bno_slave_interaction_invites_icon
+	iconsize = {
+		texture = "gfx/interface/icons/bno_slave_interaction_invites_icon.dds"
+		size = { 40 40 }
+		framesize = { 240 240 }
+		frame = 1
+		offset = { 0 14 }
+		fontsize = 15
+	}
+}
+
+texticon = {
+	icon = bno_slave_interaction_marries_icon
+	iconsize = {
+		texture = "gfx/interface/icons/bno_slave_interaction_marries_icon.dds"
+		size = { 40 40 }
+		framesize = { 240 240 }
+		frame = 1
+		offset = { 0 14 }
+		fontsize = 15
+	}
+}
+
+## Relations
+
+texticon = {
+	icon = bno_slave_icon
+	iconsize = {
+		texture = "gfx/interface/icons/traits/bno_slave.dds"
+		size = { 25 25 }
+		offset = { 0 6 }
+		fontsize = 16
+	}
+}
+
+texticon = {
+	icon = bno_cum_slave_icon
+	iconsize = {
+		texture = "gfx/interface/icons/bno_cum_slave.dds"
+		size = { 25 25 }
+		offset = { 0 6 }
+		fontsize = 16
+	}
+}
+
+texticon = {
+	icon = bno_bull_icon
+	iconsize = {
+		texture = "gfx/interface/icons/traits/bno_bull.dds"
+		size = { 25 25 }
+		offset = { 0 6 }
+		fontsize = 16
+	}
+}
+
+texticon = {
+	icon = bno_slave_owner_icon
+	iconsize = {
+		texture = "gfx/interface/icons/bno_slave_owner.dds"
+		size = { 25 25 }
+		offset = { 0 6 }
+		fontsize = 16
+	}
+}

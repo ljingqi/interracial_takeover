@@ -71,3 +71,61 @@ bno_set_bno_cum_slave_hook = {
         }
     }
 }
+
+bno_remove_bno_cum_slave_hook = {
+    $SOURCE$ = {
+        if = {
+            limit = {
+                has_hook_of_type = {
+                    type = bno_cum_slave_hook
+                    target = $TARGET$
+                }
+            }
+            remove_hook = {
+                type = bno_cum_slave_hook
+                target = $TARGET$
+            }
+        }
+    }
+}
+
+### Character Interaction
+#
+###
+
+remove_recipient_marriage_and_concubinage_effect = {
+    scope:recipient = {
+        if = {
+            limit = {
+                is_married = yes
+                NOT = { is_spouse_of = scope:actor }
+            }
+            every_spouse = {
+                divorce = scope:recipient
+            }
+        }
+        if = {
+            limit = {
+                is_concubine = yes
+                NOT = { is_concubine_of = scope:actor }
+            }
+            concubinist = {
+                remove_concubine = scope:recipient
+            }
+        }
+    }
+}
+
+bno_slave_interaction_invites_effect = {
+    remove_recipient_marriage_and_concubinage_effect = yes
+    scope:actor = {
+        add_courtier = scope:recipient
+    }
+}
+
+bno_slave_interaction_marries_effect = {
+    remove_recipient_marriage_and_concubinage_effect = yes
+    scope:actor = {
+        marry = scope:recipient
+    }
+}

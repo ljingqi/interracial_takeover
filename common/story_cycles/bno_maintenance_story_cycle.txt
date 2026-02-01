@@ -449,7 +449,57 @@
 				is_ai = yes
 			}
 		}
-		
+		#Slave Interaction
+		random_valid = {
+			triggered_effect = {
+				trigger = {
+					story_owner = {
+						save_temporary_scope_as = story_owner
+						any_relation = {
+							type = bno_cum_slave
+							NOT = { is_courtier_of = scope:story_owner }
+						}
+					}
+				}
+				effect = {
+					story_owner = {
+						save_scope_as = actor
+						random_relation = {
+							type = bno_cum_slave
+							limit = {
+								NOT = { is_courtier_of = scope:actor }
+							}
+							save_scope_as = recipient
+						}
+						bno_slave_interaction_invites_effect = yes
+					}
+				}
+			}
+			triggered_effect = {
+				trigger = {
+					story_owner = {
+						save_temporary_scope_as = story_owner
+						any_relation = {
+							type = bno_cum_slave
+							NOT = { is_spouse_of = scope:story_owner }
+						}
+					}
+				}
+				effect = {
+					story_owner = {
+						save_scope_as = actor
+						random_relation = {
+							type = bno_cum_slave
+							limit = {
+								NOT = { is_spouse_of = scope:actor }
+							}
+							save_scope_as = recipient
+						}
+						bno_slave_interaction_marries_effect = yes
+					}
+				}
+			}
+		}		
         #use tincture of genesis artifact
         triggered_effect = {
             trigger = {

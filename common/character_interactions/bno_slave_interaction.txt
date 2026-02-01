@@ -1,0 +1,61 @@
+﻿bno_slave_interaction = {
+    icon = bno_slave_interaction
+    desc = bno_slave_interaction.desc
+    category = interaction_category_friendly
+    interface_priority = 999
+    common_interaction = yes
+
+    send_name = bno_slave_interaction.send_name
+    ignores_pending_interaction_block = yes
+    auto_accept = yes
+
+    is_shown = {
+        scope:actor != scope:recipient
+
+        scope:actor = {
+            has_relation_bno_cum_slave = scope:recipient
+        }
+
+        scope:recipient = {
+            OR = {
+                NOT = { is_spouse_of = scope:actor }
+                trigger_if = {
+                    limit = { is_ruler = no }
+                    NOT = { is_courtier_of = scope:actor }
+                }
+            }
+        }
+    }
+
+    send_option = { # Courtier
+        is_valid = {
+            scope:recipient = {
+                is_ruler = no
+                NOT = { is_courtier_of = scope:actor }
+            }
+        }
+        flag = bno_slave_interaction_invites
+        localization = bno_slave_interaction.invites
+    }
+
+    send_option = { # Marry
+        is_valid = {
+            scope:recipient = {
+                NOT = { is_spouse_of = scope:actor }
+            }
+        }
+        flag = bno_slave_interaction_marries
+        localization = bno_slave_interaction.marries
+    }
+
+    on_accept = {
+        if = {
+            limit = { scope:bno_slave_interaction_invites = yes }
+            bno_slave_interaction_invites_effect = yes
+        }
+        else_if = {
+            limit = { scope:bno_slave_interaction_marries = yes }
+            bno_slave_interaction_marries_effect = yes
+        }
+    }
+}

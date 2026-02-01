@@ -1475,7 +1475,9 @@ bno_cum_addiction.1007 = {
         sex_animations = yes
         show_as_tooltip = {
             bno_increase_cum_addiction_level = yes
-            set_relation_bno_cum_slave_owner = scope:owner
+            scope:owner = {
+                set_relation_bno_cum_slave = root
+            }
         }
     }
 
