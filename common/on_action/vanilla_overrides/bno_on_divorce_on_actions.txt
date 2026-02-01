@@ -1,0 +1,93 @@
+﻿# Characters get divorced in any way
+# root = character initiating the divorce
+# scope:spouse = the divorced spouse
+# scope:reason = flag:script or flag:faith
+on_divorce = { # Will not fire from historical divorces
+	effect = {
+		save_scope_as = spouse_2
+		scope:spouse = {
+			trigger_event = marriage_effect.3001 #Flag if you really liked your spouse, to enable suicide
+		}
+		send_divorce_notifications_effect = { CHARACTER = root SPOUSE = scope:spouse }
+		send_divorce_notifications_effect = { CHARACTER = scope:spouse SPOUSE = root }
+
+		# Update opinion effects for the divorced spouse as well as all remaining spouses/concubines.
+		scope:spouse = {
+			save_scope_as = is_being_divorced
+			update_active_consort_opinion_effect = { PARTNER = root }
+		}
+		every_consort = {
+			limit = { this != scope:spouse }
+			update_active_consort_opinion_effect = { PARTNER = root }
+		}
+		#Remove blood brother opinion
+		if = {
+			limit = {
+				scope:spouse = {
+					has_blood_brother = yes
+					any_relation = {
+						type = blood_brother
+						root = {
+							has_opinion_modifier = {
+								modifier = blood_brother_close_family_opinion
+								target = prev
+							}
+						}
+					}
+				}
+			}
+			scope:spouse = {
+				random_relation = {
+					type = blood_brother
+					save_scope_as = other_blood_brother
+				}
+			}
+			mpo_blood_brother_remove_family_opinion_effect = yes
+		}
+		if = {
+			limit = {
+				has_blood_brother = yes
+				any_relation = {
+					type = blood_brother
+					scope:spouse = {
+						has_opinion_modifier = {
+							modifier = blood_brother_close_family_opinion
+							target = prev
+						}
+					}
+				}
+			}
+			root = {
+				random_relation = {
+					type = blood_brother
+					save_scope_as = other_blood_brother
+				}
+			}
+			scope:spouse = {
+				mpo_blood_brother_remove_family_opinion_effect = yes
+			}
+		}
+		# HOUSE RELATIONS
+		if = {
+			limit = {
+				exists = house
+				exists = scope:spouse.house
+                NOT = {
+                    scope:spouse = {
+                        has_character_modifier = bno_no_longer_black_breedable
+                    }
+                }
+			}
+			house = {
+				change_house_relation_effect = {
+					HOUSE = scope:spouse.house
+					VALUE = house_relation_damage_minor_value
+					REASON = divorce
+					CHAR = root
+					TARGET_CHAR = scope:spouse
+					TITLE = scope:dummy_gender
+				}
+			}
+		}
+	}
+}
