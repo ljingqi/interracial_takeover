@@ -1,0 +1,18 @@
+﻿on_tradition_added = {
+    on_actions = {
+        bno_on_tradition_added
+    }
+}
+
+bno_on_tradition_added = {
+    trigger = {
+        NOT = { has_variable = tradition_bno_the_great_submission_cooldown_skip }
+        any_tradition = {
+            this = culture_tradition:tradition_bno_the_great_submission
+        }
+    }
+    effect = {
+        set_variable = tradition_bno_the_great_submission_cooldown_skip
+        remove_variable = tradition_cooldown
+    }
+}

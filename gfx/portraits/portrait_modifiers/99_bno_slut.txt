@@ -491,17 +491,6 @@ bno_smaller_waist = {
 					}
 				}
 			}
-			morph = {
-				mode = modify 
-				gene = gene_bs_shoulders_size
-				value = {
-					add = {
-						value = bno_waist_size
-						multiply = -1
-						divide = bno_waist_divider_value
-					}
-				}
-			}
 		}
 		weight = {
 			base = 0
