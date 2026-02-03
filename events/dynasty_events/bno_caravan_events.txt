@@ -371,11 +371,7 @@ bno_caravan.0002 = {
             base = 0
             modifier = {
                 add = 100
-                NOT = {
-                    any_character_artifact = {
-                        has_variable = bno_chastity_piercing
-                    }
-                }
+                has_chastity_piercing_artifact = no
             }
         }
     }

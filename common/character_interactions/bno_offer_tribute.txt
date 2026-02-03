@@ -91,11 +91,7 @@
                 scope:secondary_actor = {
                     if = {
                         limit = {
-                            NOT = {
-                                any_character_artifact = {
-                                    has_variable = bno_chastity_piercing
-                                }
-                            }
+                            has_chastity_piercing_artifact = no
                         }
                         bno_create_artifact_bno_chastity_piercing_only_effect = {
                             CREATOR = scope:actor

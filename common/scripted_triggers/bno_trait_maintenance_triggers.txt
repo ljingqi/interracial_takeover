@@ -90,6 +90,12 @@ bno_is_valid_target_for_caging_prisoner = {
 	}
 }
 
+has_chastity_piercing_artifact = {
+	any_character_artifact = {
+		has_variable = bno_chastity_piercing
+	}
+}
+
 has_chastity_cage_artifact = {
 	any_character_artifact = {
 		has_variable = bno_chastity_cage

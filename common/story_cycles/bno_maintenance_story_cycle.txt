@@ -74,6 +74,42 @@
         trigger = {
             story_owner ?= { is_alive = yes }
         }
+		#chastity piercing maintenance
+		triggered_effect = {
+			trigger = {
+				story_owner = {
+					has_chastity_piercing_artifact = yes
+					is_a_girl = yes
+					is_ai = yes
+				}
+			}
+			effect = {
+				story_owner = {
+					random_character_artifact = {
+						limit = {
+							has_variable = bno_chastity_piercing
+						}
+						save_scope_as = bno_chastity_piercing
+					}
+					if = {
+						limit = {
+							any_child = {
+								is_alive = yes
+								count > 3
+							}
+						}
+						scope:bno_chastity_piercing = {
+							equip_artifact_to_owner = yes
+						}
+					}
+					else = {
+						scope:bno_chastity_piercing = {
+							unequip_artifact_from_owner = yes
+						}
+					}
+				}
+			}
+		}
 		#transform holy order leader and member into girls
 		triggered_effect = {
 			trigger = {
@@ -1373,11 +1409,7 @@
             		    scope:secondary_actor = {
             		        if = {
             		            limit = {
-            		                NOT = {
-            		                    any_character_artifact = {
-            		                        has_variable = bno_chastity_piercing
-            		                    }
-            		                }
+            		                has_chastity_piercing_artifact = no
             		            }
             		            bno_create_artifact_bno_chastity_piercing_only_effect = {
             		                CREATOR = scope:actor
