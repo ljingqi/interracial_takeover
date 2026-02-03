@@ -55,6 +55,7 @@
             triggered_effect = { # if milk amount modifier is 0 end this story
                 trigger = {
                     var:bno_milk_amount_modifier < 1
+                    story_owner.var:bno_milk_amount <= 0
                 }
                 effect = {
                     end_story = yes
