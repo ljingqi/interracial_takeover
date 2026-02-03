@@ -2301,3 +2301,9 @@ bno_whispered_rose = {
 	
 	flag = can_not_marry
 }
+
+#bno_faux_immortality = {
+#	immortal = yes
+#	good = yes
+#	physical = yes
+#}

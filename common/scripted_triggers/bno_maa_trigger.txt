@@ -29,6 +29,7 @@ bno_can_recruit_bno_cock_maidens = {
 }
 
 bno_can_recruit_bno_seed_thralls = {
+    bno_can_recruit_bno_african_warriors = yes
     culture = {
         has_cultural_parameter = unlock_maa_seed_thralls
     }

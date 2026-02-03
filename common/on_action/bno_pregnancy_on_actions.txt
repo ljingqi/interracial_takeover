@@ -1,7 +1,7 @@
 ﻿on_pregnancy_mother = {
     on_actions = {
         bno_apply_lactation_story
-        delay = { days = 1 }
+        delay = { days = 7 }
         bno_on_pregnancy_mother
     }
 }
@@ -30,35 +30,13 @@ bno_on_pregnancy_mother = {
             random = {
                 chance = {
                     value = 0
-                    if = {
-                        limit = {
-                            is_bno_curious_and_up = yes
-                        }
-                        add = 20
-                    }
-                    if = {
-                        limit = {
-                            is_bno_blacked_and_up = yes
-                        }
-                        add = 20
-                    }
-                    if = {
-                        limit = {
-                            is_bno_snowbunny_and_up = yes
-                        }
-                        add = 20
-                    }
-                    if = {
-                        limit = {
-                            is_bno_qos_and_up = yes
-                        }
-                        add = 20
-                    }
-                    if = {
-                        limit = {
-                            has_trait = bno_whitegirl_5
-                        }
-                        add = 20
+                    switch = {
+                        trigger = has_trait
+                        bno_whitegirl_1 = { add = 20 }
+                        bno_whitegirl_2 = { add = 40 }
+                        bno_whitegirl_3 = { add = 60 }
+                        bno_whitegirl_4 = { add = 80 }
+                        bno_whitegirl_5 = { add = 100 }
                     }
                 }
                 remove_character_flag = birth_mother_will_die

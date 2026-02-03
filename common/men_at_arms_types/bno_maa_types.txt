@@ -2,6 +2,9 @@
 @provisions_cost_infantry_cheap = 3
 @provisions_cost_infantry_expensive = 12
 @bno_african_warriors_ai_score = 150
+@bno_seed_thralls_ai_score = 250
+@bno_cock_maidens_ai_score = 300
+@bno_ebony_elites_ai_score = 450
 
 bno_african_warriors = {
 	type = bnwo_armies
@@ -73,7 +76,7 @@ bno_ebony_elites = {
 	max_regiments = 1
 	
 	stack = 100
-	ai_quality = { value = 100 }
+	ai_quality = { value = @bno_ebony_elites_ai_score }
 }
 #Cock Maidens
 bno_cock_maidens = {
@@ -105,7 +108,7 @@ bno_cock_maidens = {
     provision_cost = @provisions_cost_infantry_expensive
 
     stack = 150
-    ai_quality = { value = 90 }
+    ai_quality = { value = @bno_cock_maidens_ai_score }
     icon = bno_cock_maidens
 }
 #Unlocked from Tradition
@@ -131,6 +134,6 @@ bno_seed_thralls = {
 	provision_cost = 1
 
 	stack = 100
-	ai_quality = { value = 100 }
+	ai_quality = { value = @bno_seed_thralls_ai_score }
 	icon = bno_seed_thralls
 }
