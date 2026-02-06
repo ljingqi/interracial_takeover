@@ -20,6 +20,7 @@
 			is_a_girl = yes
 			is_african = no
 			NOT = { has_trait = bno_cum_addiction_4 }
+			NOT = { any_relation = { type = bno_cum_slave_owner } }
         }
 	}
 

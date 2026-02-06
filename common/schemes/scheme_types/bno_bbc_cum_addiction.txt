@@ -16,6 +16,11 @@
 		}
 		scope:target = {
 			is_alive = yes
+			NOT = {
+				any_relation = {
+					type = bno_cum_slave_owner
+				}
+			}
 		}
     }
 	uses_resistance = yes
@@ -824,6 +829,12 @@
 		}
 		scheme_owner = {
 			save_scope_as = owner
+		}
+		scope:target ?= {
+			remove_trait = bno_cum_addiction_1
+			remove_trait = bno_cum_addiction_2
+			remove_trait = bno_cum_addiction_3
+			remove_trait = bno_cum_addiction_4
 		}
 		scope:owner = {
 			send_interface_toast = {

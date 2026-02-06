@@ -585,10 +585,9 @@ bno_title_change.0006 = {
 					gold = scope:target1.gold
 				}
 			}
-			add_trait = slave
 		}
 		root = {
-			set_relation_slave = {
+			set_relation_bno_slave = {
 				target = scope:target1
 				reason = bbc_too_good
 			}
