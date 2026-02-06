@@ -4,15 +4,17 @@
             save_scope_as = story_owner
         }
         every_in_list = {
-            variable = bno_patrons
+            variable = bno_tributes
             limit = {
                 is_alive = yes
             }
-            send_interface_toast = {
-                type = bno_blacked_events
-                title = story_bno_offer_tribute_rewards_died_title
-                desc = story_bno_offer_tribute_rewards_died_desc
-                right_icon = scope:story_owner
+            var:bno_tribute_owner = {
+                send_interface_toast = {
+                    type = bno_blacked_events
+                    title = story_bno_offer_tribute_rewards_died_title
+                    desc = story_bno_offer_tribute_rewards_died_desc
+                    right_icon = scope:story_owner
+                }
             }
         }
         end_story = yes
@@ -123,7 +125,7 @@
         months = { 3 9 }
         trigger = {
             variable_list_size = {
-                name = bno_patrons
+                name = bno_tributes
                 value > 0
             }
         }
@@ -134,19 +136,22 @@
                     save_scope_as = story_owner
                 }
                 every_in_list = {
-                    variable = bno_patrons
-                    limit = { is_alive = no }
-                    save_scope_as = bno_dead_patrons
-                    scope:story_owner = {
-                        remove_list_variable = {
-                            name = bno_patrons
-                            target = scope:bno_dead_patrons
+                    variable = bno_tributes
+                    limit = {
+                        var:bno_tribute_owner = {
+                            is_alive = no
                         }
+                    }
+                    set_variable = {
+                        name = bno_tribute_owner
+                        value = var:bno_return_address.province_owner
                     }
                 }
                 every_in_list = {
-                    variable = bno_patrons
-                    save_scope_as = patrons
+                    variable = bno_tributes
+                    var:bno_tribute_owner = {
+                        save_scope_as = patrons
+                    }                    
                     scope:patrons = {
                         send_interface_message = {
                             type = bno_blacked_events

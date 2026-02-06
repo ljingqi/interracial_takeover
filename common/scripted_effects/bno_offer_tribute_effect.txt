@@ -169,11 +169,13 @@ bno_offer_tribute_final_reward = {
         limit = {
             owns_story_of_type = story_bno_offer_tribute_rewards
         }
-        var:story_bno_offer_tribute_rewards = {
-            add_to_variable_list = {
-                name = bno_patrons
-                target = scope:owner
+        scope:tribute = {
+            set_variable = {
+                name = bno_tribute_owner
+                value = scope:owner
             }
+        }
+        var:story_bno_offer_tribute_rewards = {
             add_to_variable_list = {
                 name = bno_tributes
                 target = scope:tribute
@@ -189,11 +191,13 @@ bno_offer_tribute_final_reward = {
             name = story_bno_offer_tribute_rewards
             value = scope:story_bno_offer_tribute_rewards
         }
-        scope:story_bno_offer_tribute_rewards = {
-            add_to_variable_list = {
-                name = bno_patrons
-                target = scope:owner
+        scope:tribute = {
+            set_variable = {
+                name = bno_tribute_owner
+                value = scope:owner
             }
+        }
+        scope:story_bno_offer_tribute_rewards = {
             add_to_variable_list = {
                 name = bno_tributes
                 target = scope:tribute
@@ -302,14 +306,13 @@ bno_remove_from_tributes_and_patrons_list = {
     }
     story_owner = {
         save_scope_as = tribute
+        remove_variable = bno_tribute_owner
         scope:target = {
-            remove_list_variable = {
-                name = bno_tributes
-                target = scope:tribute
-            }
-            remove_list_variable = {
-                name = bno_patrons
-                target = scope:owner
+            var:story_bno_offer_tribute_rewards = {
+                remove_list_variable = {
+                    name = bno_tributes
+                    target = scope:tribute
+                }
             }
         }
     }

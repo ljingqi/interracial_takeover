@@ -26,7 +26,10 @@
         days = { 15 45 }
         trigger = {
             var:bno_offer_tribute_target = {
-                is_alive = no
+                OR = {
+                    is_alive = no
+                    is_imprisoned = yes
+                }
             }
         }
         triggered_effect = {
