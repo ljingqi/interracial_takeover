@@ -29,6 +29,11 @@ setup_bnwo_leader_effect = {
                 faith = faith:bbcs
                 is_culture_bnoc = yes
 
+                OR = {
+                    is_bbc = yes
+                    is_bno_mindless_bbc_slut = yes
+                }
+
                 trigger_if = {
                     limit = {
                         faith = { has_doctrine = doctrine_gender_male_dominated }
@@ -158,6 +163,7 @@ spawn_bnwo_revolt_troops = {
         war = root.faction_war
         name = bnwo_faction_event_troops
     }
+    #BNO MAA
     spawn_army = {
         men_at_arms = {
             type = bno_african_warriors
@@ -176,6 +182,78 @@ spawn_bnwo_revolt_troops = {
         location = scope:local_center_of_rebellion
         war = root.faction_war
         name = bnwo_faction_event_troops
+    }
+    if = {
+        limit = {
+            can_create_maa = bno_seed_thralls
+        }
+        spawn_army = {
+            men_at_arms = {
+                type = bno_seed_thralls
+                stacks = {
+                    value = 0
+                    joined_faction = {
+                        every_faction_county_member = {
+                            limit = {
+                                duchy = scope:local_center_of_rebellion.duchy
+                            }
+                            add = county_maa_to_raise
+                        }
+                    }
+                }
+            }
+            location = scope:local_center_of_rebellion
+            war = root.faction_war
+            name = bnwo_faction_event_troops
+        }
+    }
+    if = {
+        limit = {
+            can_create_maa = bno_cock_maidens
+        }
+        spawn_army = {
+            men_at_arms = {
+                type = bno_cock_maidens
+                stacks = {
+                    value = 0
+                    joined_faction = {
+                        every_faction_county_member = {
+                            limit = {
+                                duchy = scope:local_center_of_rebellion.duchy
+                            }
+                            add = county_maa_to_raise
+                        }
+                    }
+                }
+            }
+            location = scope:local_center_of_rebellion
+            war = root.faction_war
+            name = bnwo_faction_event_troops
+        }
+    }
+    if = {
+        limit = {
+            can_create_maa = bno_ebony_elites
+        }
+        spawn_army = {
+            men_at_arms = {
+                type = bno_ebony_elites
+                stacks = {
+                    value = 0
+                    joined_faction = {
+                        every_faction_county_member = {
+                            limit = {
+                                duchy = scope:local_center_of_rebellion.duchy
+                            }
+                            add = county_maa_to_raise
+                        }
+                    }
+                }
+            }
+            location = scope:local_center_of_rebellion
+            war = root.faction_war
+            name = bnwo_faction_event_troops
+        }
     }
     # Spawn MAAs - An appropriate amount of troops dependent on the terrain type they spawn in
     if = {

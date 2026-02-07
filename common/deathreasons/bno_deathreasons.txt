@@ -1,0 +1,7 @@
+﻿bno_bbc_conqueror_replacement = {
+    public_knowledge = yes
+}
+
+bno_african_ruler_marital_fight = {
+    public_knowledge = yes
+}

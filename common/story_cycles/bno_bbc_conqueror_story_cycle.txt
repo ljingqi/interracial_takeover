@@ -1,0 +1,246 @@
+﻿story_bno_bbc_conqueror = {
+    on_setup = {
+        story_owner = {
+            save_scope_as = story_owner
+        }
+        add_to_global_variable_list = {
+            name = story_bno_bbc_conqueror
+            target = scope:story_owner
+        }
+    }
+    on_owner_death = {
+        end_story = yes
+    }
+
+    on_end = {
+        story_owner = {
+            save_scope_as = story_owner
+        }
+        remove_global_variable = bno_bbc_takeover_conqueror_bonus
+        remove_list_global_variable = {
+            name = story_bno_bbc_conqueror
+            target = scope:story_owner
+        }
+    }
+
+    effect_group = { # check if still a conqueror
+        months = 1
+        trigger = {
+            story_owner = {
+                NOT = { has_trait = conqueror }
+            }
+        }
+        triggered_effect = {
+            trigger = { always = yes }
+            effect = {
+                end_story = yes
+            }
+        }
+    }
+
+    effect_group = { # make sure vassal is bbc or slut with bbc spouse
+        months = 1
+        trigger = {
+            story_owner = {
+                any_vassal_or_below = {
+                    OR = {
+                        is_bbc = no
+                        trigger_if = {
+                            limit = {
+                                is_slut = yes
+                            }
+                            any_spouse = {
+                                is_bbc = no
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        first_valid = {
+            triggered_effect = {
+                trigger = {
+                    story_owner = {
+                        any_vassal_or_below = {
+                            is_slut = no
+                            is_bbc = no
+                            is_ai = yes
+                        }
+                    }
+                }
+                effect = {
+                    story_owner = {
+                        save_scope_as = story_owner
+                        random_vassal_or_below = {
+                            limit = {
+                                is_slut = no
+                                is_bbc = no
+                                is_ai = yes
+                            }
+                            save_scope_as = bno_bad_vassal
+                        }
+                        
+                        random_courtier_or_guest = {
+                            limit = {
+                                is_bbc = yes
+                                is_available_adult = yes
+                            }
+                            save_scope_as = bno_bad_vassal_replacer
+                        }
+
+                        if = {
+                            limit = {
+                                NOT = {
+                                    exists = scope:bno_bad_vassal_replacer
+                                }
+                            }
+                            create_character = {
+                                location = scope:bno_bad_vassal.primary_title.title_province
+                                template = bbc_noble_template
+                                trait = bno_camp_leader
+                                save_scope_as = bno_bad_vassal_replacer
+                            }
+                        }
+
+                        scope:bno_bad_vassal_replacer = {
+                            if = {
+                                limit = {
+                                    is_lowborn = yes
+                                }
+                                create_dynasty = {
+                                    spread_to_descendants = yes
+                                }
+                            }
+                        }
+                        create_title_and_vassal_change = {
+                            type = granted
+                            save_scope_as = change
+                            add_claim_on_loss = no
+                        }
+                        scope:bno_bad_vassal = {
+                            every_held_title = {
+                                change_title_holder = {
+                                    holder = scope:bno_bad_vassal_replacer
+                                    change = scope:change
+                                    take_baronies = yes
+                                }
+                            }
+                        }
+
+                        resolve_title_and_vassal_change = scope:change
+
+                        scope:bno_bad_vassal = {
+                            every_spouse = {
+                                save_scope_as = bno_bad_vassal_spouse
+                                scope:bno_bad_vassal_replacer = {
+                                    set_relation_bno_slave = scope:bno_bad_vassal_spouse
+                                }
+                            }
+                            every_child = {
+                                save_scope_as = bno_bad_vassal_child
+                                scope:bno_bad_vassal_replacer = {
+                                    set_relation_bno_slave = scope:bno_bad_vassal_child
+                                }
+                            }
+                            death = {
+                                death_reason = bno_bbc_conqueror_replacement
+                                killer = scope:bno_bad_vassal_replacer
+                            }
+                        }
+
+                        create_alliance = {
+                            target = scope:bno_bad_vassal_replacer
+                            allied_through_owner = scope:story_owner
+	                        allied_through_target = scope:bno_bad_vassal_replacer
+                        }
+                    }
+                }
+            }
+            triggered_effect = {
+                trigger = {
+                    story_owner = {
+                        any_vassal_or_below = {
+                            is_slut = yes
+                            any_spouse = {
+                                is_bbc = no
+                            }
+                        }
+                    }
+                }
+                effect = {
+                    story_owner = {
+                        random_vassal_or_below = {
+                            limit = {
+                                is_slut = yes
+                                any_spouse = {
+                                    is_bbc = no
+                                }
+                            }
+                            save_scope_as = bno_bad_slut
+                        }
+                        random_courtier_or_guest = {
+                            limit = {
+                                is_bbc = yes
+                                is_available_adult = yes
+                                allowed_more_spouses = yes
+                            }
+                            save_scope_as = bno_slut_marriage_target
+                        }
+                        if = {
+                            limit = {
+                                NOT = {
+                                    exists = scope:bno_slut_marriage_target
+                                }
+                            }
+                            random_vassal_or_below = {
+                                limit = {
+                                    is_bbc = yes
+                                    is_available_adult = yes
+                                    allowed_more_spouses = yes
+                                }
+                                save_scope_as = bno_slut_marriage_target
+                            }
+                        }
+                        if = {
+                            limit = {
+                                NOT = {
+                                    exists = scope:bno_slut_marriage_target
+                                }
+                            }
+                            create_character = {
+                                location = scope:bno_bad_vassal.primary_title.title_province
+                                template = bbc_noble_template
+                                trait = bno_camp_leader
+                                save_scope_as = bno_slut_marriage_target
+                            }
+                        }
+                        scope:bno_slut_marriage_target = {
+                            if = {
+                                limit = {
+                                    is_lowborn = yes
+                                }
+                                create_dynasty = {
+                                    spread_to_descendants = yes
+                                }
+                            }
+                        }
+                        scope:bno_bad_slut = {
+                            every_spouse = {
+                                limit = {
+                                    is_bbc = no
+                                }
+                                save_scope_as = bno_bad_slut_spouse
+                                scope:bno_bad_slut = {
+                                    divorce = scope:bno_bad_slut_spouse
+                                }
+                            }
+                        }
+                        scope:bno_slut_marriage_target = {
+                            marry = scope:bno_bad_slut
+                        }
+                   }
+                }
+            }
+        }
+    }
+}

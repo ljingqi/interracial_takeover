@@ -656,6 +656,20 @@ bno_embrace_african_1.0007 = {
 			}
 		}
 
+        if = {
+            limit = {
+                scope:faction = {
+                    has_variable = bno_bbc_takeover_faction
+                }
+            }
+            scope:faction = {
+                every_faction_county_member = {
+                    set_county_culture = scope:peasant_leader.culture
+                    set_county_faith = scope:peasant_leader.faith
+                }
+            }
+        }
+
 		hidden_effect = {
 			if = {
 				limit = {

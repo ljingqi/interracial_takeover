@@ -1,0 +1,244 @@
+﻿story_bno_african_ruler = {
+    on_owner_death = {
+        end_story = yes
+    }
+
+    effect_group = {
+        days = { 15 45 }
+        first_valid = {
+            triggered_effect = { # kill non BBC male and replace it with BBC
+                trigger = {
+                    story_owner = {
+                        is_bbc = no
+                        is_slut = no
+                    }
+                }
+                effect = {
+                    story_owner = {
+                        save_scope_as = story_owner
+                        random_courtier_or_guest = {
+                            limit = {
+                                is_ideal_african_ruler_trigger = yes
+                            }
+                            save_scope_as = bno_better_african_ruler
+                        }
+                        if = {
+                            limit = {
+                                NOT = {
+                                    exists = scope:bno_better_african_ruler
+                                }
+                            }
+                            random_vassal_or_below = {
+                                limit = {
+                                    is_ideal_african_ruler_trigger = yes
+                                }
+                                save_scope_as = bno_better_african_ruler
+                            }
+                        }
+
+                        if = {
+                            limit = {
+                                exists = scope:bno_better_african_ruler
+                            }
+                            scope:bno_better_african_ruler = {
+                                if = {
+                                    limit = {
+                                        is_lowborn = yes
+                                    }
+                                    create_dynasty = {
+                                        spread_to_descendants = yes
+                                    }
+                                }
+                            }
+                            create_title_and_vassal_change = {
+                                type = granted
+                                save_scope_as = change
+                                add_claim_on_loss = no
+                            }
+                            scope:story_owner = {
+                                every_held_title = {
+                                    change_title_holder = {
+                                        holder = scope:bno_better_african_ruler
+                                        change = scope:change
+                                        take_baronies = yes
+                                    }
+                                }
+                            }
+                            resolve_title_and_vassal_change = scope:change
+                            scope:story_owner = {
+                                every_spouse = {
+                                    save_scope_as = story_owner_spouse
+                                    scope:bno_better_african_ruler = {
+                                        set_relation_bno_slave = scope:story_owner_spouse
+                                    }
+                                }
+                                every_child = {
+                                    save_scope_as = story_owner_child
+                                    scope:bno_better_african_ruler = {
+                                        set_relation_bno_slave = scope:story_owner_child
+                                    }
+                                }
+                                death = {
+                                    death_reason = bno_bbc_conqueror_replacement
+                                    killer = scope:bno_better_african_ruler
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            triggered_effect = { # make sluts have BBC spouse
+                trigger = {
+                    story_owner = {
+                        is_bbc = no
+                        is_slut = yes
+                        any_spouse = {
+                            is_bbc = no
+                        }
+                    }
+                }
+                effect = {
+                    story_owner = {
+                        save_scope_as = story_owner
+                        random_courtier_or_guest = {
+                            limit = {
+                                is_bbc = yes
+                                is_available_adult = yes
+                            }
+                            save_scope_as = bno_better_african_ruler_spouse
+                        }
+                        if = {
+                            limit = {
+                                NOT = {
+                                    exists = scope:bno_better_african_ruler_spouse
+                                }
+                            }
+                            random_vassal_or_below = {
+                                limit = {
+                                    is_bbc = yes
+                                    is_available_adult = yes
+                                }
+                                save_scope_as = bno_better_african_ruler_spouse
+                            }
+                        }
+                        if = {
+                            limit = {
+                                exists = scope:bno_better_african_ruler_spouse
+                            }
+                            every_spouse = {
+                                limit = {
+                                    is_bbc = no
+                                }
+                                save_scope_as = bno_spouse
+                                scope:story_owner = {
+                                    divorce = scope:bno_spouse
+                                }
+                                death = {
+                                    death_reason = bno_african_ruler_marital_fight
+                                    killer = scope:bno_better_african_ruler_spouse
+                                }
+                            }
+                            scope:bno_better_african_ruler_spouse = {
+                                marry = scope:story_owner
+                            }
+                        }
+                    }
+                }
+            }
+            triggered_effect = { # convert religion to BNWO
+                trigger = {
+                    story_owner = {
+                        faith = {
+                            is_considered_bno_faith = no
+                        }
+                    }
+                }
+                effect = {
+                    story_owner = {
+                        if = {
+                            limit = {
+                                liege ?= {
+                                    faith = {
+                                        is_considered_bno_faith = yes
+                                    }
+                                }
+                            }
+                            set_character_faith = liege.faith
+                            add_piety = medium_piety_loss
+                        }
+                        else = {
+                            convert_to_bbc_religion = yes
+                            add_piety = medium_piety_loss
+                        }
+                    }
+                }
+            }
+            triggered_effect = { # convert culture to BNWO
+                trigger = {
+                    story_owner = {
+                        is_culture_bnoc = no
+                    }
+                }
+                effect = {
+                    story_owner = {
+                        if = {
+                            limit = {
+                                liege ?= {
+                                    is_culture_bnoc = yes
+                                }
+                            }
+                            set_culture_same_as = liege
+                        }
+                        else = {
+                            set_culture = culture:bnoc
+                        }
+                    }
+                }
+            }
+            triggered_effect = { # convert county religion to BNWO
+                trigger = {
+                    story_owner = {
+                        any_realm_county = {
+                            is_culture_bnoc = no
+                        }
+                    }
+                }
+                effect = {
+                    story_owner = {
+                        save_scope_as = story_owner
+                        random_realm_county = {
+                            limit = {
+                                is_culture_bnoc = no
+                            }
+                            set_county_culture = scope:story_owner.culture
+                        }
+                    }
+                }
+            }
+            triggered_effect = { # convert county culture to BNWO
+                trigger = {
+                    story_owner = {
+                        any_realm_county = {
+                            faith = {
+                                is_considered_bno_faith = no
+                            }
+                        }
+                    }
+                }
+                effect = {
+                    story_owner = {
+                        save_scope_as = story_owner
+                        random_realm_county = {
+                            limit = {
+                                faith = {
+                                    is_considered_bno_faith = no
+                                }
+                            }
+                            set_county_faith = scope:story_owner.faith
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,80 @@
+﻿story_bno_african_top_liege = {
+    on_setup = {
+        save_scope_as = story_bno_african_top_liege
+        story_owner = {
+            set_variable = {
+                name = story_bno_african_top_liege
+                value = scope:story_bno_african_top_liege
+            }
+        }
+    }
+
+    on_owner_death = {
+        end_story = yes
+    }
+
+    effect_group = {
+        days = { 15 45 }
+        trigger = {
+            story_owner = { is_at_war = no }
+        }
+        random_valid = {
+            triggered_effect = { # offer vassalization
+                trigger = {
+                    story_owner = {
+                        save_temporary_scope_as = story_owner
+                        any_character_to_title_neighboring_and_across_water_county = {
+                            holder = {
+                                highest_held_title_tier < scope:story_owner.highest_held_title_tier
+                            }
+                        }
+                    }
+                }
+                effect = {
+                    story_owner = {
+                        save_scope_as = story_owner
+                        random_character_to_title_neighboring_and_across_water_county = {
+                            limit = {
+                                holder = {
+                                    highest_held_title_tier < scope:story_owner.highest_held_title_tier
+                                }
+                            }
+                            save_scope_as = target_title
+                        }
+                        save_scope_as = actor
+                        scope:target_title.holder = {
+                            save_scope_as = recipient
+                        }
+                        if = {
+                            limit = {
+                                scope:recipient = {
+                                    is_ai = yes
+                                }
+                            }
+                            scope:recipient = {
+                                if = {
+                                    limit = { has_government = feudal_government }
+                                    save_scope_value_as = { name = normal_obligations value = yes }
+                                    save_scope_value_as = { name = low_obligations value = no }
+                                    save_scope_value_as = { name = high_obligations value = no }
+                                    save_scope_value_as = { name = religious_exemption value = no }
+                                }
+                                else_if = {
+                                    limit = { has_government = clan_government }
+                                    save_scope_value_as = { name = religious_exemption_clan value = no }
+                                    save_scope_value_as = { name = no_exemption_clan value = yes }
+                                }
+                            }
+                            offer_vassalization_interaction_effect = yes
+                            create_alliance = {
+                                target = scope:recipient
+                                allied_through_owner = scope:story_owner
+	                            allied_through_target = scope:recipient
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

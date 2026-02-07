@@ -1,24 +1,33 @@
-﻿bno_civil_unrest = {
-    icon = bno_civil_unrest
+﻿bno_bbc_takeover = {
+    icon = bno_bbc_takeover
     group = independence
     target_titles = claim
     allow_hostages = no
     ai = yes
-    
+
     allowed_for_character = {
         scope:attacker = {
-            is_leading_faction_type = bnwo_faction
+            is_leading_faction_type = bno_bbc_takeover_faction
         }
     }
 
     allowed_against_character = {
         scope:defender = {
-            dynasty = {
-                has_dynasty_perk = bno_embrace_african_1
+            OR = {
+                is_bbc = no
+                trigger_if = {
+                    limit = { is_slut = yes }
+                    any_spouse = {
+                        is_bbc = no
+                    }
+                }
+            }
+            capital_county.title_province = {
+                geographical_region = world_africa
             }
         }
-	}
-
+    }
+    
     valid_to_start = {
     }
 
@@ -27,16 +36,78 @@
     }
 
     on_victory_desc = {
-        desc = bno_civil_unrest.victory.desc
+        desc = bno_bbc_takeover.victory.desc
     }
 
     on_victory = {
+        if = {
+            limit = {
+                OR = {
+                    NOT = { has_global_variable = bno_bbc_takeover_conqueror_bonus }
+                    global_variable_list_size = {
+                        name = story_bno_bbc_conqueror
+                        value <= 0
+                    }
+                }
+            }
+            set_global_variable = bno_bbc_takeover_conqueror_bonus
+            scope:attacker = {
+                add_trait = conqueror
+                spawn_army = {
+                    men_at_arms = {
+                        type = bno_african_warriors
+                        stacks = { 5 10 }
+                    }
+                    location = scope:attacker.capital_province
+                    name = bno_bbc_takeover_conqueror_bonus.army_name
+                }
+                if = {
+                    limit = {
+                        can_create_maa = bno_seed_thralls
+                    }
+                    spawn_army = {
+                        men_at_arms = {
+                            type = bno_seed_thralls
+                            stacks = { 5 10 }
+                        }
+                        location = scope:attacker.capital_province
+                        name = bno_bbc_takeover_conqueror_bonus.army_name
+                    }
+                }
+                if = {
+                    limit = {
+                        can_create_maa = bno_cock_maidens
+                    }
+                    spawn_army = {
+                        men_at_arms = {
+                            type = bno_cock_maidens
+                            stacks = { 5 10 }
+                        }
+                        location = scope:attacker.capital_province
+                        name = bno_bbc_takeover_conqueror_bonus.army_name
+                    }
+                }
+                if = {
+                    limit = {
+                        can_create_maa = bno_ebony_elites
+                    }
+                    spawn_army = {
+                        men_at_arms = {
+                            type = bno_ebony_elites
+                            stacks = { 5 10 }
+                        }
+                        location = scope:attacker.capital_province
+                        name = bno_bbc_takeover_conqueror_bonus.army_name
+                    }
+                }
+                create_story = story_bno_bbc_conqueror
+            }
+        }
         scope:attacker = { show_pow_release_message_effect = yes }
         scope:defender = {
             add_prestige_level = -1
         }
-
-        #Legitimacy from losing faction war
+        ### Legitimacy Change
         scope:attacker = {
             if = {
                 limit = {
@@ -73,42 +144,27 @@
             }
         }
 
-        random_in_list = {
-			list = target_titles
-			save_scope_as = target_title
-		}
-
-        scope:attacker = {
-            joined_faction = {
-                every_faction_member = {
-                    add_truce_both_ways = {
-                        character = scope:defender
-                        years = 1
-                        war = root.war
-                        result = victory
-                    }
-                }
-            }
-        }
-        #Give target title away
         create_title_and_vassal_change = {
             type = independency
             save_scope_as = change
         }
-        hidden_effect = {
-            scope:target_title = {
-                change_title_holder_include_vassals = {
-                    holder = scope:attacker
-                    change = scope:change
-                    take_baronies = no
-                }
+
+        every_in_list = {
+            list = target_titles
+            change_title_holder_include_vassals = {
+                holder = scope:attacker
+                change = scope:change
+                take_baronies = no
             }
+            set_county_culture = scope:attacker.culture
+            set_county_faith = scope:attacker.faith 
         }
+
         resolve_title_and_vassal_change = scope:change
     }
 
     on_white_peace_desc = {
-        desc = bno_civil_unrest.white_peace.desc
+        desc = bno_bbc_takeover.white_peace.desc
     }
 
     on_white_peace = {
@@ -143,7 +199,7 @@
     }
 
     on_defeat_desc = {
-        desc = bno_civil_unrest.defeat.desc
+        desc = bno_bbc_takeover.defeat.desc
     }
 
     on_defeat = {
@@ -245,7 +301,7 @@
     attacker_allies_inherit = no
 	defender_allies_inherit = yes
 
-    war_name = bno_civil_unrest_name
+    war_name = bno_bbc_takeover_name
 
     interface_priority = 999
 

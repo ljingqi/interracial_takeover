@@ -514,3 +514,69 @@ bno_on_declared_war = {
 	
 	intrigue_duel_on_attack_effect = yes
 }
+
+bno_spawn_army_for_factions = {
+	scope:attacker = {
+        joined_faction = {
+            every_faction_county_member = {
+                random_county_province = {
+                    save_scope_as = chosen_location
+                }
+                scope:attacker = {
+                    spawn_army = {
+                        levies = { 3000 5000 }
+                        men_at_arms = {
+                            type = bno_african_warriors
+                            stacks = { 10 20 }
+                        }
+                        location = scope:chosen_location
+                        war = scope:war
+                        name = bno_bbc_takeover.army_name
+                    }
+                    if = {
+                        limit = {
+                            can_create_maa = bno_seed_thralls
+                        }
+                        spawn_army = {
+                            men_at_arms = {
+                                type = bno_seed_thralls
+                                stacks = { 10 20 }
+                            }
+                            location = scope:chosen_location
+                            war = scope:war
+                            name = bno_bbc_takeover.army_name
+                        }
+                    }
+                    if = {
+                        limit = {
+                            can_create_maa = bno_cock_maidens
+                        }
+                        spawn_army = {
+                            men_at_arms = {
+                                type = bno_cock_maidens
+                                stacks = { 10 20 }
+                            }
+                            location = scope:chosen_location
+                            war = scope:war
+                            name = bno_bbc_takeover.army_name
+                        }
+                    }
+                    if = {
+                        limit = {
+                            can_create_maa = bno_ebony_elites
+                        }
+                        spawn_army = {
+                            men_at_arms = {
+                                type = bno_ebony_elites
+                                stacks = { 10 20 }
+                            }
+                            location = scope:chosen_location
+                            war = scope:war
+                            name = bno_bbc_takeover.army_name
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

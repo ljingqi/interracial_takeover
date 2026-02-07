@@ -1,115 +1,112 @@
 ﻿@base_bnwo_discontent_progress = 5
 
-bnwo_faction = {
-    casus_belli = bno_civil_unrest
+bno_bbc_takeover_faction = {
+    casus_belli = bno_bbc_takeover
 
-    short_effect_desc = bnwo_faction.short_effect_desc
+    short_effect_desc = bno_bbc_takeover_faction.short_effect_desc
 
     sort_order = 999
 
     leaders_allowed_to_leave = no
-    player_can_join = no
+    player_can_join = yes
     power_threshold = 0
 
     discontent_progress = {
         base = @base_bnwo_discontent_progress
         common_discontent_progress_modifier = yes
+        #Culture
         modifier = {
-            add = {
-                value = 0
-                if = {
-                    limit = {
-                        faction_target = {
-                            any_realm_county = {
-                                OR = {
-                                    has_county_modifier = bno_local_bbc_unsatisfied
-                                    has_county_modifier = bno_siding_with_local
-                                    has_county_modifier = bno_bbc_angered
-                                    has_county_modifier = bno_reject_sending_courtier_to_bbc
-                                    has_county_modifier = bno_disapprove_daughter_marriage_with_bbc
-                                }
-                            }
+            add = 10
+            faction_leader = {
+                save_temporary_scope_as = faction_leader
+            }
+            faction_target = {
+                any_realm_county = {
+                    culture = scope:faction_leader.culture
+                }
+            }
+        }
+        #Faith
+        modifier = {
+            add = 10
+            faction_leader = {
+                save_temporary_scope_as = faction_leader
+            }
+            faction_target = {
+                any_realm_county = {
+                    faith = scope:faction_leader.faith
+                }
+            }
+        }
+        #Not BBC/Slut with BBC Spouse
+        modifier = {
+            add = 20
+            faction_target = {
+                OR = {
+                    is_bbc = no
+                    trigger_if = {
+                        limit = {
+                            is_slut = yes
                         }
-                    }
-                    faction_target = {
-                        every_realm_county = {
-                            limit = {
-                                has_county_modifier = bno_local_bbc_unsatisfied
-                            }
-                            add = 2
-                        }
-                        every_realm_county = {
-                            limit = {
-                                has_county_modifier = bno_siding_with_local
-                            }
-                            add = 2
-                        }
-                        every_realm_county = {
-                            limit = {
-                                has_county_modifier = bno_bbc_angered
-                            }
-                            add = 2
-                        }
-                        every_realm_county = {
-                            limit = {
-                                has_county_modifier = bno_reject_sending_courtier_to_bbc
-                            }
-                            add = 2
-                        }
-                        every_realm_county = {
-                            limit = {
-                                has_county_modifier = bno_disapprove_daughter_marriage_with_bbc
-                            }
-                            add = 2
+                        any_spouse = {
+                            is_bbc = no
                         }
                     }
                 }
             }
+        }
+        modifier = {
+            add = -1000
             faction_target = {
-                any_realm_county = {
-                    OR = {
-                        has_county_modifier = bno_local_bbc_unsatisfied
-                        has_county_modifier = bno_siding_with_local
-                        has_county_modifier = bno_bbc_angered
-                        has_county_modifier = bno_reject_sending_courtier_to_bbc
-                        has_county_modifier = bno_disapprove_daughter_marriage_with_bbc
+                OR = {
+                    is_bbc = yes
+                    trigger_if = {
+                        limit = {
+                            is_slut = yes
+                        }
+                        any_spouse = {
+                            is_bbc = yes
+                            count = all
+                        }
                     }
                 }
             }
         }
     }
 
-    name = bnwo_faction.name    
+    name = bno_bbc_takeover_faction.name
 
     requires_county = yes
     requires_character = no
 
-    #Faction existence is valid
     is_valid = {
         always = yes
     }
 
-    #county valid check
     is_county_valid = {
-        county_opinion < 0
-        OR = {
-            has_county_modifier = bno_local_bbc_unsatisfied
-            has_county_modifier = bno_siding_with_local
-            has_county_modifier = bno_bbc_angered
-            has_county_modifier = bno_reject_sending_courtier_to_bbc
-            has_county_modifier = bno_disapprove_daughter_marriage_with_bbc
+        title_province = {
+            geographical_region = world_africa
         }
+        NOT = { culture = scope:faction.faction_leader.culture }
+        NOT = { faith = scope:faction.faction_leader.faith }
     }
 
-    #character valid check
     is_character_valid = {
-        OR = {
-            is_bbc = yes
-            is_bno_mindless_bbc_slut = yes
-        }
         is_culture_bnoc = yes
         faith = {
             is_considered_bno_faith = yes
+        }
+        OR = {
+            is_bbc = yes
+            trigger_if = {
+                limit = {
+                    is_slut = yes
+                }
+                any_spouse = {
+                    is_bbc = yes
+                    count = all
+                }
+            }
         }
     }
 
@@ -130,7 +127,6 @@ bnwo_faction = {
         special_title = {
             save_scope_as = target_title
         }
-
         save_temporary_scope_as = county_faction
         every_faction_county_member = {
             limit = {
@@ -189,66 +185,79 @@ bnwo_faction = {
     }
 
     can_character_join = {
-        OR = {
-            is_bbc = yes
-            is_bno_mindless_bbc_slut = yes
-        }
         is_culture_bnoc = yes
         faith = {
             is_considered_bno_faith = yes
         }
-    }
-
-    can_county_join = {
-        county_opinion < 0
         OR = {
-            has_county_modifier = bno_local_bbc_unsatisfied
-            has_county_modifier = bno_siding_with_local
-            has_county_modifier = bno_bbc_angered
-            has_county_modifier = bno_reject_sending_courtier_to_bbc
-            has_county_modifier = bno_disapprove_daughter_marriage_with_bbc
+            is_bbc = yes
+            trigger_if = {
+                limit = {
+                    is_slut = yes
+                }
+                any_spouse = {
+                    is_bbc = yes
+                    count = all
+                }
+            }
         }
     }
 
     can_county_create = {
         county_opinion < 0
-
-        OR = {
-            has_county_modifier = bno_local_bbc_unsatisfied
-            has_county_modifier = bno_siding_with_local
-            has_county_modifier = bno_bbc_angered
-            has_county_modifier = bno_reject_sending_courtier_to_bbc
-            has_county_modifier = bno_disapprove_daughter_marriage_with_bbc
-        }
     }
 
     can_character_become_leader = {
-        has_trait = bno_bbc
+        is_culture_bnoc = yes
+        faith = {
+            is_considered_bno_faith = yes
+        }
+        OR = {
+            is_bbc = yes
+            trigger_if = {
+                limit = {
+                    is_slut = yes
+                }
+                any_spouse = {
+                    is_bbc = yes
+                    count = all
+                }
+            }
+        }
     }
 
     county_create_score = {
         base = 0
         modifier = {
-            add = -100
-            has_county_modifier = bno_might_makes_right
+            add = 100
+            is_culture_bnoc = no
         }
         modifier = {
             add = 100
-            has_county_modifier = bno_local_bbc_unsatisfied
+            faith = {
+                is_considered_bno_faith = no
+            }
         }
         modifier = {
-            add = -50
+            add = 100
             holder = {
                 OR = {
-                    has_trait = bno_bbc
-                    has_trait = bno_whitegirl
+                    is_bbc = no
+                    trigger_if = {
+                        limit = {
+                            is_slut = yes
+                        }
+                        any_spouse = {
+                            is_bbc = no
+                        }
+                    }
                 }
             }
         }
         modifier = {
-            add = 50
-            holder = {
-                has_trait = bno_whiteboi
+            factor = 0
+            title_province = {
+                NOT = { geographical_region = world_africa }
             }
         }
     }
@@ -256,26 +265,35 @@ bnwo_faction = {
     county_join_score = {
         base = 0
         modifier = {
-            add = -100
-            has_county_modifier = bno_might_makes_right
+            add = 100
+            is_culture_bnoc = no
         }
         modifier = {
             add = 100
-            has_county_modifier = bno_local_bbc_unsatisfied
+            faith = {
+                is_considered_bno_faith = no
+            }
         }
         modifier = {
-            add = -50
+            add = 100
             holder = {
                 OR = {
-                    has_trait = bno_bbc
-                    has_trait = bno_whitegirl
+                    is_bbc = no
+                    trigger_if = {
+                        limit = {
+                            is_slut = yes
+                        }
+                        any_spouse = {
+                            is_bbc = no
+                        }
+                    }
                 }
             }
         }
         modifier = {
-            add = 50
-            holder = {
-                has_trait = bno_whiteboi
+            factor = 0
+            title_province = {
+                NOT = { geographical_region = world_africa }
             }
         }
     }
@@ -284,23 +302,25 @@ bnwo_faction = {
 
     ai_join_score = {
         base = 0
-
-        modifier = {
-            add = -100
-            is_playable_character = yes
-        }
-
         modifier = {
             add = 100
-            has_trait = bno_bbc
-        }
-        modifier = {
-            add = 100
-            has_trait = bno_camp_leader
+            OR = {
+                is_bbc = yes
+                trigger_if = {
+                    limit = {
+                        is_slut = yes
+                    }
+                    any_spouse = {
+                        is_bbc = yes
+                        count = all
+                    }
+                }
+            }
         }
     }
 
     on_creation = {
+        set_variable = bno_bbc_takeover_faction
         random_faction_county_member = {
             save_scope_as = founding_county
         }
@@ -329,7 +349,6 @@ bnwo_faction = {
             }
         }
     }
-
 
     ai_demand_chance = {
         base = 100

@@ -14,3 +14,17 @@ bno_is_pregnant = {
         has_trait = futa_impregnated
     }
 }
+
+is_ideal_african_ruler_trigger = {
+    OR = {
+        is_bbc = yes
+        trigger_if = {
+            limit = { is_slut = yes }
+            any_spouse = {
+                is_bbc = yes
+                count = all
+            }
+        }
+    }
+    is_adult = yes
+}
